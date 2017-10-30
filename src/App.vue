@@ -16,8 +16,13 @@ export default {
   },
   data(){
       return {
-          currentTab:0
+          currentTab:{
+              tab:0
+          }
       }
+  },
+  methods:{
+
   }
 }
 </script>

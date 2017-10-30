@@ -3,47 +3,11 @@
     <h1>Resume</h1>
     <dl>
       <dt><span>Fill in your resume</span></dt>
-      <dd v-bind:class="{active:currentTab==0}" v-on:click="currentTab=0">
+      <dd v-for="i in [0,1,2,3,4]" v-bind:class="{active:currentTab.tab==i}" v-on:click="currentTab.tab=i">
         <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-user"></use>
+          <use v-bind:xlink:href="'#icon-'+icons[i]"></use>
         </svg>
-        <span>Person Info</span>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bianji"></use>
-        </svg>
-      </dd>
-      <dd v-bind:class="{active:currentTab==1}" v-on:click="currentTab=1">
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-gongwenbao"></use>
-        </svg>
-        <span>Experience</span>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bianji"></use>
-        </svg>
-      </dd>
-      <dd v-bind:class="{active:currentTab==2}" v-on:click="currentTab=2">
-        <svg class="icon education" aria-hidden="true">
-          <use xlink:href="#icon-xueshimao"></use>
-        </svg>
-        <span>Education</span>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bianji"></use>
-        </svg>
-      </dd>
-      <dd>
-        <svg class="icon skill" aria-hidden="true">
-          <use xlink:href="#icon-skill"></use>
-        </svg>
-        <span>Skills</span>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-bianji"></use>
-        </svg>
-      </dd>
-      <dd>
-        <svg class="icon" aria-hidden="true">
-          <use xlink:href="#icon-xiangmu"></use>
-        </svg>
-        <span>Projects</span>
+        <span>{{tabName[i]}}</span>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-bianji"></use>
         </svg>
@@ -66,7 +30,8 @@
       props:['currentTab'],
       data(){
           return {
-
+              icons:['user','gongwenbao','xueshimao','skill','xiangmu'],
+              tabName:['Person Info','Experience','Education','Skills','Projects']
           }
       }
   }
