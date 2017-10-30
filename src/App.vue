@@ -1,28 +1,46 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <Nav1 class="nav1" v-bind:currentTab="currentTab" />
+    <Editor class="editor" v-bind:currentTab="currentTab" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+  import Nav1 from './components/Nav1'
+  import Editor from './components/Editor'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Nav1,Editor
+  },
+  data(){
+      return {
+          currentTab:0
+      }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+  #app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    display: flex;
+  }
+  .icon {
+    width: 1em; height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+  }
+  .nav1{
+
+  }
+  .editor{
+    flex: 1;
+  }
+
 </style>
