@@ -4,48 +4,15 @@ $color:#409EFF;
   box-shadow: 0 2px 10px rgba(0,0,0,.2); margin-bottom: 20px; padding: 10px;
   h2{
     font-weight: normal; margin-bottom: 10px;
-  }
-  .p_info{
-    display: flex; justify-content: space-between; align-items: center;
-    .write{
-      flex: 1;
-      .el-form-item{
-        width: 49%; padding-right: 6%; display: inline-block;
-      }
-      .el-input__inner{
-        border: 1px solid #bfcbd9;
-      }
+    i{
+      float: right; margin-right: 10px; font-size: 30px;
     }
-    .el-upload{
-      float: right; margin-right: 10px;
+    .el-icon-remove{
+      color: red;
     }
   }
-  .avatar-uploader .el-upload {
-    border: 1px dashed #bfcbd9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .el-textarea__inner{
-    border: 1px solid #bfcbd9;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
+
+
 }
 .content.tip{
   padding: 0;

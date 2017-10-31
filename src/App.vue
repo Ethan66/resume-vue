@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Nav1 class="nav1" v-bind:currentTab="currentTab" />
-    <Editor class="editor" v-bind:currentTab="currentTab" />
+    <Nav1 class="nav1" v-bind:currentTab="currentTab" v-bind:icons='icons' />
+    <Editor class="editor" v-bind:currentTab="currentTab" v-bind:icons='icons' v-bind:resume="resume" />
   </div>
 </template>
 
@@ -18,7 +18,26 @@ export default {
       return {
           currentTab:{
               tab:0
-          }
+          },
+        icons:['user','gongwenbao','xueshimao','skill','xiangmu']
+        ,
+        resume:{
+          profile:{
+              name:'',workDirection:'',email:'',number:'',age:'',website:'',imageUrl:'',address:'',summary:''
+          },
+          company:[
+            {name:'',department:'',position:'',date:'',content:''}
+          ],
+          education:[
+            {name:'',degree:'',profession:'',date:'',award:''}
+          ],
+          skills:[
+            {name:'',scope:'',grade:''}
+          ],
+          projects:[
+            {website:'',module:'',position:'',date:'',summary:''}
+          ]
+        }
       }
   },
   methods:{
@@ -32,7 +51,7 @@ export default {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
   }
   .icon {
@@ -45,7 +64,7 @@ export default {
 
   }
   .editor{
-    flex: 1;
+    flex: 1; background: #f2f2f2; margin-left: 24em;
   }
 
 </style>

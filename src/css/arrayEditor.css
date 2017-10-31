@@ -1,0 +1,43 @@
+.content {
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  font-size: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  padding: 10px; }
+  .content h2 {
+    font-weight: normal;
+    margin-bottom: 10px; }
+
+.content.tip {
+  padding: 0; }
+  .content.tip p {
+    padding: 8px 20px; }
+    .content.tip p.text {
+      padding: 15px 20px;
+      color: #666; }
+  .content.tip .icon {
+    width: 22px;
+    height: 22px; }
+  .content.tip .top {
+    background: #409EFF;
+    color: #fff; }
+
+.itemEditor .el-form-item {
+  width: 49%;
+  display: inline-block;
+  padding-right: 3%; }
+.itemEditor .el-form-item:nth-child(2n) {
+  padding-right: 0;
+  padding-left: 3%;
+  float: right; }
+.itemEditor .el-date-editor {
+  width: 100% !important; }
+.itemEditor .el-input__inner {
+  border: 1px solid #bfcbd9; }
+.itemEditor .width100 {
+  width: 100%;
+  padding-right: 0; }
+
+/*# sourceMappingURL=arrayEditor.css.map */

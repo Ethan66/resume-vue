@@ -71,11 +71,7 @@
     components:{
 
     },
-      data(){
-          return {
 
-          }
-      },
     methods:{
       handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
@@ -97,27 +93,19 @@
 </script>
 
 <style lang="scss">
-  $color:#409EFF;
-  .content{
-    border-radius: 6px; overflow: hidden; background: #fff; font-size: 16px;
-    box-shadow: 0 2px 10px rgba(0,0,0,.2); margin-bottom: 20px; padding: 10px;
-    h2{
-      font-weight: normal; margin-bottom: 10px;
+  .p_info{
+    display: flex; justify-content: space-between; align-items: center;
+    .write{
+      flex: 1;
+      .el-form-item{
+        width: 49%; padding-right: 6%; display: inline-block;
+      }
+      .el-input__inner{
+        border: 1px solid #bfcbd9;
+      }
     }
-    .p_info{
-      display: flex; justify-content: space-between; align-items: center;
-      .write{
-        flex: 1;
-        .el-form-item{
-          width: 49%; padding-right: 6%; display: inline-block;
-        }
-        .el-input__inner{
-          border: 1px solid #bfcbd9;
-        }
-      }
-      .el-upload{
-        float: right; margin-right: 10px;
-      }
+    .el-upload{
+      float: right; margin-right: 10px;
     }
     .avatar-uploader .el-upload {
       border: 1px dashed #bfcbd9;
@@ -144,21 +132,6 @@
       width: 178px;
       height: 178px;
       display: block;
-    }
-  }
-  .tip{
-    padding: 0;
-    p{
-      padding: 8px 20px;
-      &.text{
-        padding: 15px 20px; color: #666;
-      }
-    }
-    .icon{
-      width: 22px; height: 22px;
-    }
-    .top{
-      background: $color; color: #fff;
     }
   }
 </style>

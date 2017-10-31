@@ -49,6 +49,7 @@
 </template>
 
 <script>
+  import '../assets/arrayEditor.scss'
   export default{
       props:["items",'title','textContent','icons'],
     computed:{
@@ -77,52 +78,5 @@
 </script>
 
 <style lang="scss">
-  $color:#409EFF;
-  .item {
-    .content {
-      border-radius: 6px; overflow: hidden; background: #fff; font-size: 16px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, .2); margin-bottom: 20px; padding: 10px;
-      h2 {
-        font-weight: normal; margin-bottom: 10px;
-        i {
-          float: right; margin-right: 10px; font-size: 30px;
-        }
-        .el-icon-remove {
-          color: red;
-        }
-      }
-    }
-    .tip {
-      padding: 0;
-      p {
-        padding: 8px 20px;
-        &.text {
-          padding: 15px 20px; color: #666;
-        }
-      }
-      .icon {
-        width: 22px; height: 22px;
-      }
-      .top {
-        background: $color; color: #fff;
-      }
-    }
-    .itemEditor {
-      .el-form-item {
-        width: 49%; display: inline-block; padding-right: 3%;
-      }
-      .el-form-item:nth-child(2n) {
-        padding-right: 0; padding-left: 3%; float: right;
-      }
-      .el-date-editor {
-        width: 100%;
-      }
-      .el-input__inner {
-        border: 1px solid #bfcbd9;
-      }
-      .width100 {
-        width: 100%; padding-right: 0;
-      }
-    }
-  }
+
 </style>
