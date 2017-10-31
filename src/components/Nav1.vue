@@ -27,10 +27,9 @@
 
 <script>
   export default{
-      props:['currentTab'],
+      props:['currentTab','icons'],
       data(){
           return {
-              icons:['user','gongwenbao','xueshimao','skill','xiangmu'],
               tabName:['Person Info','Experience','Education','Skills','Projects']
           }
       }
@@ -40,7 +39,7 @@
 <style lang="scss">
   $color:#409EFF;
   #nav{
-    width: 24em; background: #2e353e; color: #aaa;
+    width: 24em; height: 100vh; background: #2e353e; color: #aaa; position: fixed; top:0; left:0; z-index: 100;
     h1{
       text-align: center; margin-top: 50px; margin-bottom: 50px; letter-spacing: 5px;
     }

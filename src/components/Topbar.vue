@@ -18,7 +18,7 @@
   #top{
     display: flex; justify-content: space-between; align-items: center;
     padding: 16px;
-    font-size: 20px; border-bottom: 1px solid #ddd; box-shadow: 0 0 3px rgba(0,0,0,.3);
+    font-size: 20px; border-bottom: 1px solid #ddd; box-shadow: 0 0 3px rgba(0,0,0,.3); background: #fff;
     .el-button{
       padding: 8px 16px;
     }
