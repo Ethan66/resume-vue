@@ -8,6 +8,16 @@
 <script>
   import Nav1 from './components/Nav1'
   import Editor from './components/Editor'
+  import AV from 'leancloud-storage'
+
+  var APP_ID = 'VY7qo7LPaz8hXMTKfuDJmLzx-gzGzoHsz';
+  var APP_KEY = 'EPqpohCLQs7y4SeXdkWiROFt';
+
+  AV.init({
+    appId: APP_ID,
+    appKey: APP_KEY
+  });
+
 
 export default {
   name: 'app',
