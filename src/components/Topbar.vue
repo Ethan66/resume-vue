@@ -3,64 +3,87 @@
     <div class="log">
     </div>
     <div class="actions">
-      <el-button type="primary" @click="signUp = true">
+      <el-button type="primary" @click="actionType.signUp = true">
         <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-zhuce"></use>
       </svg>注册</el-button>
-      <el-button @click="login = true">
+      <el-button @click="actionType.login = true">
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-denglu"></use>
         </svg>登录</el-button>
     </div>
-    <el-dialog title="注册" :visible.sync="signUp" width="50%" :before-close="handleClose">
-      <span>这是一段信息</span>
-      <span slot="footer" class="dialog-footer">
-      <el-button @click="signUp = false">取 消</el-button>
-      <el-button type="primary" @click="signUp = false">确 定</el-button>
-    </span>
-    </el-dialog>
-    <el-dialog title="登陆" :visible.sync="login" width="50%" :before-close="handleClose">
-      <span>这是一段信息</span>
-      <span slot="footer" class="dialog-footer">
-      <el-button @click="login = false">取 消</el-button>
-      <el-button type="primary" @click="login = false">确 定</el-button>
-    </span>
-    </el-dialog>
-    <!--<div class="signUp">
-      <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="密码" prop="pass">
-          <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
+    <el-dialog title="注册" :visible.sync="actionType.signUp" width="500px">
+      <el-form :label-position="labelPosition" label-width="80px">
+        <el-form-item label="用户名">
+          <el-input v-model="formData.username" ></el-input>
         </el-form-item>
-        <el-form-item label="确认密码" prop="checkPass">
-          <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
-        </el-form-item>
-        <el-form-item label="年龄" prop="age">
-          <el-input v-model.number="ruleForm2.age"></el-input>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="formData.password" ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
-          <el-button @click="resetForm('ruleForm2')">重置</el-button>
+          <el-button @click="actionType.signUp = false">取 消</el-button>
+          <el-button @click="signUp">确 定</el-button>
         </el-form-item>
       </el-form>
-    </div>
-    <div class="login"></div>-->
+    </el-dialog>
+    <el-dialog title="登录" :visible.sync="actionType.login" width="50%">
+      <el-form :label-position="labelPosition" label-width="80px">
+        <el-form-item label="用户名">
+          <el-input v-model="formData.username" ></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input type="password" v-model="formData.password" ></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="actionType.signUp = false">取 消</el-button>
+          <el-button @click="login">确 定</el-button>
+        </el-form-item>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
+  import AV from 'leancloud-storage'
   export default{
       data(){
           return {
-            signUp: false,login:false
+            labelPosition: 'right',
+              actionType:{signUp:false,login:false},
+            formData:{username:'',password:''}
           }
       },
     methods:{
-      handleClose(done) {
-        this.$confirm('确认关闭？')
-          .then(_ => {
-            done();
-          })
-          .catch(_ => {});
+      signUp(){
+        let user = new AV.User();
+        user.setUsername(this.formData.username);
+        user.setPassword(this.formData.password);
+        user.signUp().then( (loginedUser)=> {
+          this.actionType.signUp=false
+          this.$message({
+            type: 'success',
+            message: '注册成功!'
+          });
+        }, (error)=>{
+          this.$message({
+            type: 'info',
+            message: "注册失败！"
+          });
+        });
+      },
+      login(){
+        AV.User.logIn(this.formData.username, this.formData.password).then( (loginedUser)=>{
+          this.actionType.login=false
+          this.$message({
+            type: 'success',
+            message: '登录成功!'
+          });
+        }, (error)=>{
+          this.$message({
+            type: 'info',
+            message: "登录失败！"
+          });
+        });
       }
     }
   }
@@ -77,6 +100,26 @@
     .actions{
       .icon{
         width: 20px; height: 18px; vertical-align: -3px;
+      }
+    }
+    .el-dialog{
+      border-radius: 6px;
+    }
+    .el-dialog__body{
+      padding: 20px 40px 10px 15px;
+      .el-form-item:last-child{
+        .el-form-item__content{
+          text-align: center; margin-left: 0 !important;
+        }
+        button{
+          margin-right: 30px;
+        }
+        input[type=submit]{
+          display: inline-block; line-height: 1; white-space: nowrap; cursor: pointer; background: #fff; border: 1px solid #d8dce5;
+          color: #5a5e66; -webkit-appearance: none; text-align: center; box-sizing: border-box; outline: 0;
+          margin: 0; -webkit-transition: .1s; transition: .1s; padding: 12px 20px; border-radius: 4px;
+          font-size: 14px; padding: 8px 16px; background: #409eff; color: #fff;
+        }
       }
     }
   }
