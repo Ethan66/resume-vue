@@ -1,7 +1,8 @@
 <template>
   <div id="app">
     <Nav1 class="nav1" v-show="preview.show" v-bind:currentTab="currentTab" v-bind:icons='icons' />
-    <Editor class="editor" v-show="preview.show" v-bind:currentTab="currentTab" v-bind:icons='icons' v-bind:resume="resume" v-bind:show='preview' />
+    <Editor class="editor" v-show="preview.show" v-bind:currentTab="currentTab" v-bind:icons='icons' v-bind:resume="resume" v-bind:show='preview'
+       />
     <Preview v-show="!preview.show" v-bind:resume='resume' v-bind:show='preview' />
   </div>
 </template>
@@ -25,6 +26,9 @@ export default {
   name: 'app',
   components: {
     Nav1,Editor,Preview
+  },
+  created(){
+    this.fetchResumes()
   },
   data(){
       return {
@@ -56,7 +60,22 @@ export default {
       }
   },
   methods:{
-
+    fetchResumes(){
+      if(true){
+        var query = new AV.Query('Allresumes');
+        query.find()
+          .then((resumes)=>{
+            let avAllresumes = resumes[0]
+            console.log(resumes[0])
+            let id = avAllresumes.id
+            console.log(id)
+            this.resume = JSON.parse(avAllresumes.attributes.content)
+            this.resume.id = id
+          }, function(error){
+            console.error(error)
+          })
+      }
+    }
   }
 }
 </script>

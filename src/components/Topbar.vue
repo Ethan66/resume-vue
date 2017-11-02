@@ -64,12 +64,18 @@
       //当用户没有请求AV.User.logOut()时，账号不会主动退出，刷新也不会退,但是数据会没有，所以要在created里面先拿一下数据
       created(){
           this.currentUser=this.getCurrent()
-        //console.log(this.currentUser)
         if(this.currentUser.id){
           this.actionType.signOrLogin=false
         }
-        this.fetchResumes()
+
       },
+     /* computed:{
+        currentUser:{
+            get(){
+                return this.getCurrent()
+            }
+        }
+      },*/
       data(){
           return {
             labelPosition: 'right',
@@ -79,23 +85,6 @@
           }
       },
     methods:{
-      fetchResumes(){
-        if(this.currentUser.id){
-          var query = new AV.Query('Allresumes');
-          query.find()
-            .then((resumes)=>{
-              let avAllresumes = resumes[0]
-              console.log(resumes[0])
-              let id = avAllresumes.id
-              console.log(id)
-              this.resume = JSON.parse(avAllresumes.attributes.content)
-              this.resume.id = id
-              console.log(this.resume.profile.name)
-            }, function(error){
-              console.error(error)
-            })
-        }
-      },
       getCurrent(){
           var current=AV.User.current()
           if(current){
@@ -112,7 +101,7 @@
           this.actionType.signUp=false
           this.actionType.signOrLogin=false
           this.currentUser=this.getCurrent()
-          console.log(this.currentUser)
+         // console.log(this.currentUser)
           this.$message({
             type: 'success',
             message: '注册成功!'
@@ -129,7 +118,8 @@
           this.actionType.login=false
           this.actionType.signOrLogin=false
           this.currentUser=this.getCurrent()
-          console.log(this.currentUser)
+          window.location.reload()
+         // console.log(this.currentUser)
           this.$message({
             type: 'success',
             message: '登录成功!'
