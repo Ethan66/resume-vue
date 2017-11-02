@@ -15,6 +15,12 @@
           <el-form-item label="姓名">
             <el-input placeholder="请输入姓名" v-model='profile.name'></el-input>
           </el-form-item>
+          <el-form-item label="身高">
+            <el-input placeholder="请输入有效邮箱" v-model='profile.height'></el-input>
+          </el-form-item>
+          <el-form-item label="学历">
+            <el-input placeholder="请输入手机号码" v-model='profile.education'></el-input>
+          </el-form-item>
           <el-form-item label="职位意向">
             <el-input placeholder="请输入职位" v-model='profile.workDirection'></el-input>
           </el-form-item>
@@ -98,7 +104,7 @@
     .write{
       flex: 1;
       .el-form-item{
-        width: 49%; padding-right: 6%; display: inline-block;
+        width: 49%; padding-right: 6%; display: inline-block; margin-bottom: 10px;
       }
       .el-input__inner{
         border: 1px solid #bfcbd9;

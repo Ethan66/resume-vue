@@ -38,7 +38,7 @@ export default {
         ,
         resume:{
           profile:{
-              name:'',workDirection:'',email:'',number:'',age:'',website:'',imageUrl:'',address:'',summary:''
+              name:'',height:'',education:'',workDirection:'',email:'',number:'',age:'',website:'',imageUrl:'',address:'',summary:''
           },
           company:[
             {name:'',department:'',position:'',date:'',content:''}
