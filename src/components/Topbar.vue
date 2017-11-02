@@ -54,8 +54,15 @@
 <script>
   import AV from 'leancloud-storage'
   export default{
+      //created走在data（）后面，当数据初始化好了以后，created才执行
+      //当用户没有请求AV.User.logOut()时，账号不会主动退出，刷新也不会退
       created(){
           this.currentUser=this.getCurrent()
+        console.log(this.currentUser)
+        if(this.currentUser.id){
+          this.actionType.signOrLogin=false
+        }
+
       },
       data(){
           return {
@@ -66,14 +73,14 @@
           }
       },
     methods:{
-          getCurrent(){
-              var current=AV.User.current()
-              if(current){
-                let {attributes:{username},id}=current
-                return {id,username}
-              }
-              return null
-          },
+      getCurrent(){
+          var current=AV.User.current()
+          if(current){
+            let {attributes:{username},id}=current
+            return {id,username}
+          }
+          return null
+      },
       signUp(){
         let user = new AV.User();
         user.setUsername(this.formData.username);
