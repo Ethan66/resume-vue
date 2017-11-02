@@ -21,6 +21,13 @@
             v-bind:textContent="'主要填写在线项目预览、负责模块、团队定位、项目时长，以及在本项目里面的收获与体会'" v-bind:icons="icons[4]" />
       </li>
     </ol>
+    <div class="btn">
+      <el-button-group>
+        <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
+        <el-button type="primary" v-on:click='show.show=true'><i class="el-icon-share"></i>点击预览</el-button>
+        <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+      </el-button-group>
+    </div>
   </div>
 </template>
 
@@ -31,7 +38,7 @@
   import Skill from './Skill'
 
   export default{
-      props:['currentTab','resume','icons'],
+      props:['currentTab','resume','icons','show'],
       components:{
           Topbar,Profile,ArrayEditor,Skill
       },
@@ -51,6 +58,9 @@
   #editor{
     ol{
       padding: 50px;
+    }
+    .btn{
+      position: fixed; bottom: 0; right: 0;
     }
   }
 </style>

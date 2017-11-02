@@ -58,7 +58,7 @@
       //当用户没有请求AV.User.logOut()时，账号不会主动退出，刷新也不会退
       created(){
           this.currentUser=this.getCurrent()
-        console.log(this.currentUser)
+        //console.log(this.currentUser)
         if(this.currentUser.id){
           this.actionType.signOrLogin=false
         }
