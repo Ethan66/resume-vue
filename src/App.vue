@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Nav1 class="nav1" v-show="!preview.show" v-bind:currentTab="currentTab" v-bind:icons='icons' />
-    <Editor class="editor" v-show="!preview.show" v-bind:currentTab="currentTab" v-bind:icons='icons' v-bind:resume="resume" v-bind:show='preview' />
-    <Preview v-show="preview.show" v-bind:resume='resume' v-bind:show='preview' />
+    <Nav1 class="nav1" v-show="preview.show" v-bind:currentTab="currentTab" v-bind:icons='icons' />
+    <Editor class="editor" v-show="preview.show" v-bind:currentTab="currentTab" v-bind:icons='icons' v-bind:resume="resume" v-bind:show='preview' />
+    <Preview v-show="!preview.show" v-bind:resume='resume' v-bind:show='preview' />
   </div>
 </template>
 

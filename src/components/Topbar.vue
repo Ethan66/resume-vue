@@ -80,15 +80,17 @@
       },
     methods:{
       fetchResumes(){
-        if(this.currentUser){
+        if(this.currentUser.id){
           var query = new AV.Query('Allresumes');
           query.find()
             .then((resumes)=>{
               let avAllresumes = resumes[0]
+              console.log(resumes[0])
               let id = avAllresumes.id
+              console.log(id)
               this.resume = JSON.parse(avAllresumes.attributes.content)
               this.resume.id = id
-              console.log(this.resume)
+              console.log(this.resume.profile.name)
             }, function(error){
               console.error(error)
             })
