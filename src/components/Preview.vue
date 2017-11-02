@@ -2,35 +2,36 @@
   <div id="preview">
     <!--{{resume}}-->
     <div class="preContent">
+      {{resume}}
       <h1>个人简历</h1>
       <div class="info">
         <div class="text">
           <ul>
             <li>
-              <span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>Ethan
+              <span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span>{{resume.profile.name}}
             </li>
             <li>
-              <span>求职意向</span>web前端
+              <span>求职意向</span>{{resume.profile.workDirection}}
             </li>
             <li>
-              <span>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</span>12345678910
+              <span>电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话</span>{{resume.profile.number}}
             </li>
             <li>
-              <span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>1224604327@qq.com
+              <span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>{{resume.profile.email}}
             </li>
           </ul>
           <ul>
             <li>
-              <span>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高</span>150
+              <span>身&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;高</span>{{resume.profile.height}}
             </li>
             <li>
-              <span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</span>24
+              <span>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄</span>{{resume.profile.age}}
             </li>
             <li>
-              <span>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span>本科
+              <span>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span>{{resume.profile.education}}
             </li>
             <li>
-              <span>社交网站</span>百度淘宝
+              <span>社交网站</span>{{resume.profile.website}}
             </li>
           </ul>
         </div>
@@ -57,10 +58,14 @@
           <span>工作经历</span>
         </h3>
         <ol>
-          <li>
-            <p>2000/09-2003/6</p><p>杭州师范大学(本科)</p><p>信息工程</p>
+          <li v-for="(company,index) in resume.company">
+            <p>{{company.date[0].replace(/[-]/g,'/').split('').splice(0,7).join('')}}
+              -
+              {{company.date[1].replace(/[-]/g,'/').split('').splice(0,7).join('')}}</p>
+            <p>{{company.name}} ({{company.department}})</p><p>{{company.position}}</p>
             <div class="text">
               <p>工作内容：</p>
+              <p>{{company.content}}</p>
             </div>
           </li>
         </ol>
