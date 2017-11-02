@@ -1,6 +1,6 @@
 <template>
   <div id="editor">
-    <Topbar />
+    <Topbar v-bind:resume='resume' />
     <ol>
       <li v-show="currentTab.tab==0">
         <Profile v-bind:profile='resume.profile' />

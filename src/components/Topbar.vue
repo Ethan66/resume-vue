@@ -14,6 +14,11 @@
     </div>
     <div class="logining" v-if='!actionType.signOrLogin'>
       用户：<span style="margin-right: 10px;">{{currentUser.username}}</span>
+      <el-button type="primary" v-on:click='saveOrUpdateResumes'>
+        <svg class="icon save" aria-hidden="true">
+          <use xlink:href="#icon-yun"></use>
+        </svg>保存
+      </el-button>
       <el-button v-on:click='logout'>
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-dengchutuichuguanbi"></use>
@@ -54,6 +59,7 @@
 <script>
   import AV from 'leancloud-storage'
   export default{
+      props:['resume'],
       //created走在data（）后面，当数据初始化好了以后，created才执行
       //当用户没有请求AV.User.logOut()时，账号不会主动退出，刷新也不会退
       created(){
@@ -118,6 +124,37 @@
           });
         });
       },
+      saveResume(){
+        let dataString = JSON.stringify(this.resume)
+        var AVresumes = AV.Object.extend('Allresumes');
+        var avResumes = new AVresumes();
+        var acl = new AV.ACL()
+        acl.setReadAccess(AV.User.current(),true)
+        acl.setWriteAccess(AV.User.current(),true)
+        avResumes.set('content', dataString);
+        avResumes.setACL(acl)
+        avResumes.save().then((resume)=>{
+          this.resume.id = resume.id
+          console.log('保存成功');
+        }, function (error) {
+          alert('保存失败');
+        });
+      },
+      updateResumes(){
+        let dataString = JSON.stringify(this.resume)
+        let avResumes = AV.Object.createWithoutData('Allresumes', this.resume.id)
+        avResumes.set('content', dataString)
+        avResumes.save().then(()=>{
+          console.log('更新成功')
+        })
+      },
+      saveOrUpdateResumes(){
+        if(this.resume.id){
+          this.updateResumes()
+        }else{
+          this.saveResume()
+        }
+      },
       logout(){
         AV.User.logOut()
         this.currentUser = null
@@ -146,6 +183,9 @@
       }
       .icon{
         width: 20px; height: 22px; vertical-align: -5px;
+        &.save{
+          width: 26px;
+        }
       }
     }
     .el-dialog{
