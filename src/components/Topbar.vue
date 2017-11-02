@@ -61,14 +61,14 @@
   export default{
       props:['resume'],
       //created走在data（）后面，当数据初始化好了以后，created才执行
-      //当用户没有请求AV.User.logOut()时，账号不会主动退出，刷新也不会退
+      //当用户没有请求AV.User.logOut()时，账号不会主动退出，刷新也不会退,但是数据会没有，所以要在created里面先拿一下数据
       created(){
           this.currentUser=this.getCurrent()
         //console.log(this.currentUser)
         if(this.currentUser.id){
           this.actionType.signOrLogin=false
         }
-
+        this.fetchResumes()
       },
       data(){
           return {
@@ -79,6 +79,21 @@
           }
       },
     methods:{
+      fetchResumes(){
+        if(this.currentUser){
+          var query = new AV.Query('Allresumes');
+          query.find()
+            .then((resumes)=>{
+              let avAllresumes = resumes[0]
+              let id = avAllresumes.id
+              this.resume = JSON.parse(avAllresumes.attributes.content)
+              this.resume.id = id
+              console.log(this.resume)
+            }, function(error){
+              console.error(error)
+            })
+        }
+      },
       getCurrent(){
           var current=AV.User.current()
           if(current){
