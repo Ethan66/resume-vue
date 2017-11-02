@@ -2,7 +2,7 @@
   <div id="top">
     <div class="log">
     </div>
-    <div class="actions">
+    <div class="actions" v-if='actionType.signOrLogin'>
       <el-button type="primary" @click="actionType.signUp = true">
         <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-zhuce"></use>
@@ -11,6 +11,14 @@
         <svg class="icon" aria-hidden="true">
           <use xlink:href="#icon-denglu"></use>
         </svg>登录</el-button>
+    </div>
+    <div class="logining" v-if='!actionType.signOrLogin'>
+      用户：<span style="margin-right: 10px;">{{currentUser.username}}</span>
+      <el-button v-on:click='logout'>
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#icon-dengchutuichuguanbi"></use>
+        </svg>登出
+      </el-button>
     </div>
     <el-dialog title="注册" :visible.sync="actionType.signUp" width="500px">
       <el-form :label-position="labelPosition" label-width="80px">
@@ -46,20 +54,35 @@
 <script>
   import AV from 'leancloud-storage'
   export default{
+      created(){
+          this.currentUser=this.getCurrent()
+      },
       data(){
           return {
             labelPosition: 'right',
-              actionType:{signUp:false,login:false},
-            formData:{username:'',password:''}
+              actionType:{signUp:false,login:false,signOrLogin:true},
+            formData:{username:'',password:''},
+            currentUser:{}
           }
       },
     methods:{
+          getCurrent(){
+              var current=AV.User.current()
+              if(current){
+                let {attributes:{username},id}=current
+                return {id,username}
+              }
+              return null
+          },
       signUp(){
         let user = new AV.User();
         user.setUsername(this.formData.username);
         user.setPassword(this.formData.password);
         user.signUp().then( (loginedUser)=> {
           this.actionType.signUp=false
+          this.actionType.signOrLogin=false
+          this.currentUser=this.getCurrent()
+          console.log(this.currentUser)
           this.$message({
             type: 'success',
             message: '注册成功!'
@@ -74,6 +97,9 @@
       login(){
         AV.User.logIn(this.formData.username, this.formData.password).then( (loginedUser)=>{
           this.actionType.login=false
+          this.actionType.signOrLogin=false
+          this.currentUser=this.getCurrent()
+          console.log(this.currentUser)
           this.$message({
             type: 'success',
             message: '登录成功!'
@@ -84,6 +110,11 @@
             message: "登录失败！"
           });
         });
+      },
+      logout(){
+        AV.User.logOut()
+        this.currentUser = null
+        window.location.reload()
       }
     }
   }
@@ -100,6 +131,14 @@
     .actions{
       .icon{
         width: 20px; height: 18px; vertical-align: -3px;
+      }
+    }
+    .logining{
+      button{
+        padding: 6px 16px;
+      }
+      .icon{
+        width: 20px; height: 22px; vertical-align: -5px;
       }
     }
     .el-dialog{
