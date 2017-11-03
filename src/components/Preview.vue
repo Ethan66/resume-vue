@@ -185,9 +185,12 @@
         li{
           >p{
             display: inline-block; margin-right: 100px;
+            &:nth-child(3){
+              margin-right: 0;
+            }
           }
           .text{
-            margin-top: 10px;
+            margin-top: 10px; margin-bottom: 10px;
             p{
               padding-bottom: 6px;
             }
