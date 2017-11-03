@@ -1,8 +1,6 @@
 <template>
   <div id="preview">
-    <!--{{resume}}-->
     <div class="preContent">
-      {{resume}}
       <h1>个人简历</h1>
       <div class="info">
         <div class="text">
@@ -44,11 +42,16 @@
           <span>教育背景</span>
         </h3>
         <ol>
-          <li>
-            <p>2000/09-2003/6</p><p>杭州师范大学(本科)</p><p>信息工程</p>
+          <li v-for="(school,index) in resume.education">
+            <p>
+              {{getYYMMDD(school.date[0])}}
+              <span v-if="school.date[0]">-</span>
+              {{getYYMMDD(school.date[1])}}
+            </p>
+            <p>{{school.name}}<span v-if="school.degree">({{school.degree}})</span></p><p>{{school.profession}}</p>
             <div class="text">
-              <p>在校荣誉：</p>
-              <p>水果的风格的个好地方蝶粉蜂黄发货单给</p>
+              <p v-if="school.award">在校荣誉：</p>
+              <p>{{school.award}}</p>
             </div>
           </li>
         </ol>
@@ -59,12 +62,12 @@
         </h3>
         <ol>
           <li v-for="(company,index) in resume.company">
-            <p>{{company.date[0].replace(/[-]/g,'/').split('').splice(0,7).join('')}}
-              -
-              {{company.date[1].replace(/[-]/g,'/').split('').splice(0,7).join('')}}</p>
-            <p>{{company.name}} ({{company.department}})</p><p>{{company.position}}</p>
+            <p>{{getYYMMDD(company.date[0])}}
+              <span v-if="company.date[0]">-</span>
+              {{getYYMMDD(company.date[1])}}</p>
+            <p>{{company.name}} <span v-if='company.department'>({{company.department}})</span></p><p>{{company.position}}</p>
             <div class="text">
-              <p>工作内容：</p>
+              <p v-if="company.content">工作内容：</p>
               <p>{{company.content}}</p>
             </div>
           </li>
@@ -75,10 +78,14 @@
           <span>项目经验</span>
         </h3>
         <ol>
-          <li>
-            <p>2000/09-2003/6</p><p>杭州师范大学(本科)</p><p>信息工程</p>
+          <li v-for="(project,index) in resume.projects">
+            <p>{{getYYMMDD(project.date[0])}}
+              <span v-if="project.date[0]">-</span>
+              {{getYYMMDD(project.date[1])}}
+            </p><p>{{project.module}}<span v-if="project.position">({{project.position}})</span></p><p>{{project.website}}</p>
             <div class="text">
-              <p>总结：</p>
+              <p v-if="project.summary">总结：</p>
+              <p>{{project.summary}}</p>
             </div>
           </li>
         </ol>
@@ -88,9 +95,9 @@
           <span>个人技能</span>
         </h3>
         <ol class="text">
-          <p>前端：html+css,js,jq 5分</p>
-          <p>前端：html+css,js,jq 5分</p>
-          <p>前端：html+css,js,jq 5分</p>
+          <p v-for='(skill,index) in resume.skills'>
+            <span v-if="skill.name">{{skill.name}}：</span>{{skill.scope}} <span v-if="skill.grade">{{skill.grade}}分</span>
+          </p>
         </ol>
       </div>
       <div class="appraise">
@@ -98,7 +105,7 @@
           <span>个人评价</span>
         </h3>
         <div class="text">
-
+          {{resume.profile.summary}}
         </div>
       </div>
     </div>
@@ -119,7 +126,21 @@
           return {
 
           }
+      },
+    methods:{
+      getYYMMDD(date){
+        if(date){
+          var date1=new Date(date);
+          var year=date1.getFullYear();
+          var month=date1.getMonth()+1;
+          if(month<10){
+              month="0"+month
+          }
+          var d=date1.getDate();
+          return year+'/'+month+'/'+d
+        }
       }
+    }
   }
 </script>
 
