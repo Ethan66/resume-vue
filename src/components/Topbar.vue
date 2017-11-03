@@ -48,7 +48,7 @@
           <el-input type="password" v-model="formData.password" ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button @click="actionType.signUp = false">取 消</el-button>
+          <el-button @click="actionType.login = false">取 消</el-button>
           <el-button @click="login">确 定</el-button>
         </el-form-item>
       </el-form>
